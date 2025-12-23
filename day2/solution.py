@@ -41,12 +41,14 @@ def is_invalid_id2(id: int) -> bool:
     string = str(id)
     length = len(string)
     result = False
-    for substring_length in range(1, length // 2):
-        if length % 2 != 0:
+    for substring_length in range(1, length // 2 + 1):
+        if length % substring_length != 0:
             continue
         substrings = divide_string(string, substring_length)
         result = result or all(substrings[0] == s for s in substrings[1:])
-    return result
+        if result:
+            return True
+    return False
 
 
 def part1(data: Data):

@@ -6,7 +6,13 @@ DATA = read_input(test=True)
 
 @pytest.mark.parametrize(
     "input, output",
-    [(12341234, True), (123123123, True), (1212121212, True), (1111111, True)],
+    [
+        (12341234, True),
+        (123123123, True),
+        (1212121212, True),
+        (1111111, True),
+        (111, True),
+    ],
 )
 def test_is_invalid_id2(input, output):
     assert is_invalid_id2(input) == output
