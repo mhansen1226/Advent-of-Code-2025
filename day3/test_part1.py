@@ -13,8 +13,8 @@ DATA = read_input(test=True)
         ("818181911112111", 92),
     ],
 )
-def test_casts(input, output):
-    assert largest_joltage(input) == output
+def test_cases(input, output):
+    assert largest_joltage(input, 2) == output
 
 
 def test_part1():
