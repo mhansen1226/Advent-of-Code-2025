@@ -1,8 +1,7 @@
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-from rich import inspect, print
+from rich import print
 
 Data = list[str]
 
