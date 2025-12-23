@@ -13,8 +13,16 @@ def read_input(test: bool = False) -> Data:
         return [line.strip() for line in f.readlines()]
 
 
+def largest_joltage(bank: str) -> int:
+    values = [int(x) for x in bank]
+    max1 = max(values[:-1])
+    max_index = values.index(max1)
+    max2 = max(values[max_index + 1 :])
+    return max1 * 10 + max2
+
+
 def part1(data: Data):
-    pass
+    return sum(largest_joltage(bank) for bank in data)
 
 
 def part2(data: Data):
