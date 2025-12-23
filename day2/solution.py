@@ -1,7 +1,6 @@
-from dataclasses import dataclass
 from pathlib import Path
 
-from rich import inspect, print
+from rich import print
 
 Data = list[tuple[int, int]]
 
@@ -18,12 +17,50 @@ def read_input(test: bool = False) -> Data:
         ]
 
 
+def find_invalid_ids(start, end, method) -> list[int]:
+    return [id for id in range(start, end + 1) if method(id)]
+
+
+def is_invalid_id1(id: int) -> bool:
+    string = str(id)
+    length = len(string)
+    if length <= 1:
+        return False
+    if length % 2 == 1:
+        return False
+    return string[0 : length // 2] == string[length // 2 :]
+
+
+def divide_string(s: str, n: int) -> list[str]:
+    return [s[i : i + n] for i in range(0, len(s), n)]
+
+
+def is_invalid_id2(id: int) -> bool:
+    if is_invalid_id1(id):
+        return True
+    string = str(id)
+    length = len(string)
+    result = False
+    for substring_length in range(1, length // 2):
+        if length % 2 != 0:
+            continue
+        substrings = divide_string(string, substring_length)
+        result = result or all(substrings[0] == s for s in substrings[1:])
+    return result
+
+
 def part1(data: Data):
-    pass
+    total = 0
+    for start, end in data:
+        total += sum(find_invalid_ids(start, end, is_invalid_id1))
+    return total
 
 
 def part2(data: Data):
-    pass
+    total = 0
+    for start, end in data:
+        total += sum(find_invalid_ids(start, end, is_invalid_id2))
+    return total
 
 
 def main() -> None:
