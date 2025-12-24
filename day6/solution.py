@@ -1,8 +1,9 @@
 from pathlib import Path
 
+import numpy as np
 from rich import print
 
-Data = tuple[list[list[int]], list[str]]
+Data = tuple[np.ndarray, list[str]]
 
 
 def read_input(test: bool = False) -> Data:
@@ -10,18 +11,27 @@ def read_input(test: bool = False) -> Data:
     path = Path(__file__).parent.joinpath(file_name)
     with path.open() as f:
         data = [line.strip().split() for line in f.readlines()]
-    nums: list[list[int]] = []
+    nums = []
     for line in data[:-1]:
         nums.append([int(num) for num in line])
+    nums = np.array(nums).T
     operations = data[-1]
     return nums, operations
 
 
-def part1(nums: list[list[int]], operations: list[str]):
-    pass
+def do_operation(nums: np.ndarray, operation: str):
+    if operation == "+":
+        return nums.sum()
+    if operation == "*":
+        return nums.prod()
+    raise ValueError(f"Unknown operation: {operation}")
 
 
-def part2(nums: list[list[int]], operations: list[str]):
+def part1(nums: np.ndarray, operations: list[str]):
+    return sum(do_operation(ns, op) for ns, op in zip(nums, operations))
+
+
+def part2(nums: np.ndarray, operations: list[str]):
     pass
 
 

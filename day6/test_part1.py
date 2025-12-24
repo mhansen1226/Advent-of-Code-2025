@@ -1,7 +1,7 @@
 from solution import part1, read_input
 
-DATA = read_input(test=True)
+NUMS, OPERATIONS = read_input(test=True)
 
 
 def test_part1():
-    assert True
+    assert part1(NUMS, OPERATIONS) == 4277556
