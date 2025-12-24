@@ -15,6 +15,9 @@ class Range:
     def __contains__(self, x: int) -> bool:
         return self.start <= x <= self.stop
 
+    def span(self) -> int:
+        return self.stop - self.start + 1
+
 
 class RangeList:
     def __init__(self, ranges: list[Range] | None = None):
@@ -45,6 +48,9 @@ class RangeList:
                 merged.append(current)
         self.ranges = merged
 
+    def span(self) -> int:
+        return sum(range.span() for range in self.ranges)
+
 
 def read_input(test: bool = False) -> Data:
     file_name = "test_input.txt" if test else "input.txt"
@@ -74,14 +80,14 @@ def part1(ranges: RangeList, ids: list[int]):
     return sum(id in ranges for id in ids)
 
 
-def part2(ranges: RangeList, ids: list[int]):
-    pass
+def part2(ranges: RangeList):
+    return ranges.span()
 
 
 def main() -> None:
     ranges, ids = read_input()
     print(f"Part 1: {part1(ranges, ids)}")
-    print(f"Part 2: {part2(ranges, ids)}")
+    print(f"Part 2: {part2(ranges)}")
 
 
 if __name__ == "__main__":

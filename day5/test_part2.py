@@ -4,4 +4,4 @@ RANGES, IDS = read_input(test=True)
 
 
 def test_part2():
-    assert True
+    assert part2(RANGES) == 14
